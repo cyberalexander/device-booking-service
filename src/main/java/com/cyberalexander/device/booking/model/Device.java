@@ -207,6 +207,7 @@ package com.cyberalexander.device.booking.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -224,4 +225,6 @@ public class Device {
     private Type type;
     private Brand brand;
     private String model;
+    private Boolean available;
+    private List<HistoryRecord> usageHistory;
 }

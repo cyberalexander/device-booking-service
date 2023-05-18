@@ -202,65 +202,29 @@
  *    limitations under the License.
  */
 
-package com.cyberalexander.device.booking;
+package com.cyberalexander.device.booking.model;
 
-import com.cyberalexander.device.booking.model.Brand;
-import com.cyberalexander.device.booking.model.Device;
-import com.cyberalexander.device.booking.model.HistoryRecord;
-import com.cyberalexander.device.booking.model.Type;
-import org.springframework.stereotype.Service;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.UUID;
 
 /**
- * Created : 17/05/2023 08:56
+ * Created : 18/05/2023 10:19
  * Project : device-booking-service
  * IDE : IntelliJ IDEA
  *
  * @author CyberAlexander
  * @version 1.0
  */
-@Service
-public class DeviceInMemoryRepository {
-    private static final Map<UUID, Device> DATABASE = new ConcurrentHashMap<>();
+@Data
+@AllArgsConstructor
+public class HistoryRecord {
 
-    static {
-        List<HistoryRecord> iphoneXUsageHistory = new ArrayList<>();
-
-        Device galaxyS9 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.SAMSUNG, "S9", Boolean.TRUE, null);
-        Device galaxyS80 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.SAMSUNG, "S8", Boolean.TRUE, null);
-        Device galaxyS81 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.SAMSUNG, "S8", Boolean.TRUE, null);
-        Device nexus6 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.MOTOROLA, "Nexus 6", Boolean.TRUE, null);
-        Device onePlus9 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.ONE_PLUS, "9", Boolean.TRUE, null);
-        Device iphoneX = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.APPLE, "iPhone X", Boolean.FALSE, iphoneXUsageHistory);
-        Device iphone11 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.APPLE, "iPhone 11", Boolean.TRUE, null);
-        Device iphone12 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.APPLE, "iPhone 12", Boolean.TRUE, null);
-        Device iphone13 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.APPLE, "iPhone 13", Boolean.TRUE, null);
-        Device nokia3310 = new Device(UUID.randomUUID(), Type.MOBILE_PHONE, Brand.NOKIA, "3310", Boolean.TRUE, null);
-
-        iphoneXUsageHistory.add(new HistoryRecord(UUID.randomUUID(), iphoneX.getId(), LocalDateTime.now().minusDays(15), LocalDateTime.now().minusDays(11), "Samuel Jonson"));
-        iphoneXUsageHistory.add(new HistoryRecord(UUID.randomUUID(), iphoneX.getId(), LocalDateTime.now().minusDays(10), LocalDateTime.now().minusDays(6), "Will Smith"));
-        iphoneXUsageHistory.add(new HistoryRecord(UUID.randomUUID(), iphoneX.getId(), LocalDateTime.now().minusDays(5), null, "Samanta Phelps"));
-
-        DATABASE.put(galaxyS9.getId(), galaxyS9);
-        DATABASE.put(galaxyS80.getId(), galaxyS80);
-        DATABASE.put(galaxyS81.getId(), galaxyS81);
-        DATABASE.put(nexus6.getId(), nexus6);
-        DATABASE.put(onePlus9.getId(), onePlus9);
-        DATABASE.put(iphoneX.getId(), iphoneX);
-        DATABASE.put(iphone11.getId(), iphone11);
-        DATABASE.put(iphone12.getId(), iphone12);
-        DATABASE.put(iphone13.getId(), iphone13);
-        DATABASE.put(nokia3310.getId(), nokia3310);
-    }
-
-    public Collection<Device> getAll() {
-        return DATABASE.values();
-    }
-
-    public Optional<Device> get(UUID id) {
-        return Optional.ofNullable(DATABASE.get(id));
-    }
+    private UUID id;
+    private UUID deviceId;
+    private LocalDateTime bookedWhen;
+    private LocalDateTime releasedWhen;
+    private String bookedBy;
 }

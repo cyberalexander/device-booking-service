@@ -219,13 +219,13 @@ public enum Brand {
     ONE_PLUS("OnePlus"),
     SAMSUNG("Samsung");
 
-    private final String brand;
+    private final String brandName;
 
-    Brand(String brand) {
-        this.brand = brand;
+    Brand(String brandName) {
+        this.brandName = brandName;
     }
 
     public String getBrandName() {
-        return brand;
+        return brandName;
     }
 }
